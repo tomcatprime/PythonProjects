@@ -6,35 +6,50 @@ while True:
     
     match user_action:
         case 'add':
-            todo = input("Enter a todo: ") + "\n"
-            file = open('todos.txt', 'r')
-            todos = file.readlines()
-            file.close()
-            todos.append(todo)
-            
-            file = open('todos.txt', 'w')
-            file.writelines(todos)
-            file.close()
+             todo = input("Enter a todo: ") + "\n"
+             
+             with open('todos.txt', 'r') as file:
+                 todos = file.readlines()
+                 
+             todos.append(todo)
+             
+             with open('todos.txt', 'w') as file:
+                 todos = file.writelines()
+    
+
         case 'show' | 'display':
-            file = open('todos.txt', 'r')
-            todos = file.readlines()
-            file.close()
-            
+            with open('todos.txt', 'r') as file:
+                 todos = file.readlines()
+                 
             for index, item in enumerate(todos):
                 item = item.strip('\n')
                 row = f"{index + 1}-{item}"
                 print(row)
-        
+
         case 'edit':
             number = int(input("Number of the todo to edit: "))
             number  = number - 1
+            
+            with open('todos.txt', 'r') as file:
+                 todos = file.readlines()
+                 
             new_todo = input("Enter new todo: ")
-            todos[number] = new_todo
+            todos[number] = new_todo + '\n'
+            
+            with open('todos.txt', 'w') as file:
+                 todos = file.writelines()
         
         case 'complete':
             numer = int(input("Number of the todo to complete: "))
+            
+            with open('todos.txt', 'r') as file:
+                 todos = file.readlines()
+
             todos.pop(number - 1)
-        
+            
+            with open('todos.txt', 'w') as file:
+                 todos = file.writelines()
+
         case 'exit':
             break
         case not_match:
