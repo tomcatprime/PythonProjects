@@ -1,2 +1,9 @@
 car
 clean computer
+karol
+clean house
+
+
+clean agarage
+Clean a house
+clean computer
