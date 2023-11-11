@@ -44,17 +44,23 @@ while True:
             continue
             
     elif user_action.startswith('completed'):
-        number = int(user_action[9:])
+        try:    
+            number = int(user_action[9:])
             
-        with open('todos.txt', 'r') as file:
-                todos = file.readlines()
-        todo_to_remove = todos[number - 1].strip('\n')
-        todos.pop(number - 1)
+            with open('todos.txt', 'r') as file:
+                    todos = file.readlines()
+            todo_to_remove = todos[number - 1].strip('\n')
+            todos.pop(number - 1)
             
-        with open('todos.txt', 'w') as file:
-                todos = file.writelines(todos)
-        message = f"Todo {todo_to_remove} was removed from the list."
-        print(message)  
+            with open('todos.txt', 'w') as file:
+                    todos = file.writelines(todos)
+            message = f"Todo {todo_to_remove} was removed from the list."
+            print(message)
+        except IndexError:
+            print("There is not item with that number.")  
+            continue
+
+
         
     elif user_action.startswith('exit'):
             break
